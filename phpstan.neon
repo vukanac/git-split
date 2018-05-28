@@ -1,0 +1,4 @@
+# The configuration for PHP Stan tool.
+
+includes:
+    - vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon

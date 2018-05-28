@@ -1,0 +1,55 @@
+{
+    "name": "vukanac/ci-base-php",
+    "description": "Example/Starting point for a project with CI for PHP with Travis",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Vukanac",
+            "email": "vukanac@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.10.1",
+        "phpunit/phpunit": "^7.1",
+        "sebastian/phpcpd": "^4.0",
+        "squizlabs/php_codesniffer": "^3.2",
+        "thecodingmachine/phpstan-strict-rules": "^0.10.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts-descriptions": {
+        "phpcs": "Checks that the code conforms to coding standard",
+        "phpcbf": "Checks and FIX the code to coding standard",
+        "phpcpd": "Checks the code for code duplication",
+        "test": "Launches the preconfigured PHPUnit"
+    },
+    "scripts": {
+        "ci": [
+            "@composer validate --no-check-all --strict",
+            "@phpcs",
+            "@phpcpd",
+            "@phpstan",
+            "@test"
+        ],
+        "phpcs": "phpcs --standard=PSR2 src",
+        "phpcbf": "phpcbf --standard=PSR2 src tests",
+        "phpcpd": "phpcpd src tests",
+        "phpstan": "phpstan analyse --level=max src tests",
+        "test": "phpunit"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    }
+}

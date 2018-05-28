@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 7.1
+  - nightly
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+install:
+  - composer install --no-interaction --prefer-source
+
+before_script:
+  - wget https://github.com/infection/infection/releases/download/0.8.0/infection.phar
+  - wget https://github.com/infection/infection/releases/download/0.8.0/infection.phar.pubkey
+  - chmod +x infection.phar
+
+# Run here all same as in `composer ci`
+script:
+  - composer validate --no-check-all --strict
+  - vendor/bin/phpcs --standard=PSR2 src
+  - vendor/bin/phpcpd src tests
+  - vendor/bin/phpstan analyse src tests
+  - vendor/bin/phpunit
+  - ./infection.phar --min-msi=48 --threads=4
