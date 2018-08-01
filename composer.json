@@ -1,6 +1,6 @@
 {
     "name": "vukanac/ci-base-php",
-    "description": "Example/Starting point for a project with CI for PHP with Travis",
+    "description": "Split git conflict files to previous and new",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "symfony/console": "^4.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.10.1",
@@ -20,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "GitSplit\\": "src/GitSplit/"
         }
     },
     "autoload-dev": {
