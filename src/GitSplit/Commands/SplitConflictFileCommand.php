@@ -53,12 +53,8 @@ class SplitConflictFileCommand extends Command
             file_put_contents($target . '.txt', implode('', $splittedLines));
         }
 
-
+        $fileNames = '{' . implode(',',  array_keys($splitted)) . '}.txt';
         // outputs a message followed by a "\n"
-        $output->writeln('Whoa!');
-
-        // outputs a message without adding a "\n" at the end of the line
-        $output->write('You are about to ');
-        $output->write('create a user.');
+        $output->writeln('Conflict file separated into: ' . $fileNames);
     }
 }
