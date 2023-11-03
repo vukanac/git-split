@@ -47,14 +47,16 @@ class SplitConflictFileCommand extends Command
         $splitter = new Splitter();
         $lines = file($input->getArgument('file'));
         $splitted = $splitter->split($lines);
+        $destPaths = [];
         foreach ($splitted as $target => $splittedLines) {
             $output->writeln('');
             $output->writeln($target);
-            file_put_contents($target . '.txt', implode('', $splittedLines));
+            $destPath = $target . '.txt';
+            $destPaths[] = $destPath;
+            $content = implode('', $splittedLines);
+            file_put_contents($destPath, $content);
         }
 
-        $fileNames = '{' . implode(',',  array_keys($splitted)) . '}.txt';
-        // outputs a message followed by a "\n"
-        $output->writeln('Conflict file separated into: ' . $fileNames);
+        $output->writeln('Conflict file separated into: ' . implode(',', $destPaths));
     }
 }
